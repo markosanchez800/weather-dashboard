@@ -4,13 +4,33 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Weather App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    
+        <header>Weather App</header>
+        <main class="flex-row justify-space-between">
+            <div class="col-12 col-md-3">
+              <div class="card">
+                <h3 class="card-header">Search For a City</h3>
+                <form id="user-form" class="card-body">
+                  <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="background-color: rgba(48, 48, 121, 0.89); width:90px;">🔎</button>
+                </form>
+              </div>
+            </div>
+        
+            <div class="col-12 col-md-4">
+              <h2 class="subtitle">History:<span id="prev-search"></span></h2>
+              <div id="history-container" class="list-group"></div>
+            </div>
+          </main>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="script.js" async defer></script>
     </body>
 </html>

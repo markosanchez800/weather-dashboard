@@ -1,0 +1,17 @@
+header{
+    height:90px;
+    font-size: 45px;
+    color: white;
+    text-align: center;
+    border-bottom: 10px solid black;
+    background-color: rgba(48, 48, 121, 0.89);
+}
+
+h2{
+    margin-top:10px;
+    margin-left: 10px;
+}
+
+.card{
+    margin-top: 10px;
+}
