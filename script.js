@@ -40,11 +40,14 @@ var displayWeather = function(data,city){
     var windy = document.createElement('h2');
     //var uvIndo = document.createElement('h2');
     showName = data.name;
-    tempy = data.main.temp;
+    tempy = (data.main.temp-273.15)*9/5+32;
     humidity = data.main.humidity;
     windy = data.wind.speed;
     //uvIndo = data.
     console.log(showName);
+    console.log(tempy);
+    console.log(humidity);
+    console.log(windy);
 }
 
 
