@@ -56,7 +56,7 @@ var getFiveDay = function(city){
 };
 
 var displayFiveDay = function(data,city){
-    var dayOne = document.createElement('')
+    var dayOne = $()
 }
 
 var displayWeather = function(data,city){
@@ -65,7 +65,7 @@ var displayWeather = function(data,city){
     var typePic = document.createElement('img');
     var tempy = document.createElement('h1');
     var humidity = document.createElement('h1');
-    var windy = document.createElement('h1');
+    windy = document.createElement('h1');
     showName.innerHTML = data.name + ' ';
     typePic.src = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
     tempy.innerHTML = 'Temperature: ' + data.main.temp + ' F°';
@@ -111,7 +111,21 @@ var getUV = function(lat,lon){
 
 var displayUV = function(datas){
     uVee = datas.current.uvi;
-    console.log(uVee);
+    var colorBox = document.createElement('h1');
+
+    if (uVee <= 2){
+      colorBox.setAttribute("class"," rounded-pill bg-success");
+    } else if (uVee > 2 && uVee <= 5){
+      colorBox.setAttribute("class"," rounded-pill bg-warning");
+    } else if (uVee == 6 || uVee == 7){
+      colorBox.setAttribute("class"," rounded-pill orange");  
+    } else if (uVee > 7 && uVee < 11){
+      colorBox.setAttribute("class","rounded-pill bg-danger");    
+    } else if (uVee > 10){
+      colorBox.setAttribute("class"," rounded-pill purp"); 
+    }
+    colorBox.innerHTML = uVee;
+    windy.append(colorBox);
 }
 
 
