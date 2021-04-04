@@ -12,6 +12,10 @@ h2{
     margin-left: 10px;
 }
 
+#weather-container{
+    margin-top: 30px;
+}
+
 .card{
     margin-top: 10px;
 }
