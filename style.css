@@ -28,6 +28,15 @@ h2{
     background-color:rgb(114, 114, 179);
 }
 
+#fiveR{
+  margin-left: 450px;
+}
+
+.bluey{
+  background-color:rgba(48, 48, 121, 0.89);
+  width:150px;
+}
+
 .rounded-pill{
   width:100px;
   text-align: center;

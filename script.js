@@ -1,13 +1,17 @@
 var cityForm = document.querySelector("#city-form");
 var cityInput = document.querySelector("#city");
 var weatherBox = document.querySelector("#weather-container");
+var fiveR = document.querySelector("#fiveR");
 var currentDate = moment().format("l");
+var searchHistory = localStorage.getItem("pastCities");
 
 
 var formSubmit = function(event){
     event.preventDefault();
     var city = cityInput.value.trim();
+    
     if (city){
+        localStorage.setItem("pastCities",JSON.stringify(city.value));
         getCityWeather(city);
         getFiveDay(city);
     }
@@ -37,13 +41,13 @@ var getCityWeather = function(city){
 };
 
 var getFiveDay = function(city){
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=c8f225cee6b1a2085c93026298f7c5a4&cnt=5';
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=c8f225cee6b1a2085c93026298f7c5a4&cnt=5&units=imperial';
 
     fetch(apiUrl)
     .then(function(response){
         if (response.ok){
             response.json().then(function(data){
-                //displayFiveDay(data,city);
+                displayFiveDay(data,city);
                 console.log(data,city);
             });
         } else { 
@@ -55,9 +59,7 @@ var getFiveDay = function(city){
     });
 };
 
-var displayFiveDay = function(data,city){
-    var dayOne = $()
-}
+
 
 var displayWeather = function(data,city){
     var weatherList = document.createElement('a');
@@ -91,7 +93,7 @@ var displayWeather = function(data,city){
 }
 
 var getUV = function(lat,lon){
-    otherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&' + 'lon=' + lon + '&appid=c8f225cee6b1a2085c93026298f7c5a4';
+    otherUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&' + 'lon=' + lon + '&appid=c8f225cee6b1a2085c93026298f7c5a4&units=imperial';
     
     fetch(otherUrl)
     .then(function(response){
@@ -111,7 +113,7 @@ var getUV = function(lat,lon){
 
 var displayUV = function(datas){
     uVee = datas.current.uvi;
-    var colorBox = document.createElement('h1');
+    colorBox = document.createElement('h1');
 
     if (uVee <= 2){
       colorBox.setAttribute("class"," rounded-pill bg-success");
@@ -127,6 +129,69 @@ var displayUV = function(datas){
     colorBox.innerHTML = uVee;
     windy.append(colorBox);
 }
+var displayFiveDay = function(data,city){
+    cardOne = document.createElement('div');
+    cardTwo = document.createElement('div');
+    cardThree = document.createElement('div');
+    cardFour = document.createElement('div');
+    cardFive = document.createElement('div');
+    picOne = document.createElement('img');
+    picTwo = document.createElement('img');
+    picThree = document.createElement('img');
+    picFour = document.createElement('img');
+    picFive = document.createElement('img');
+    tempOne = document.createElement('p');
+    tempTwo = document.createElement('p');
+    tempThree = document.createElement('p');
+    tempFour = document.createElement('p');
+    tempFive = document.createElement('p');
+    humidOne = document.createElement('p');
+    humidTwo = document.createElement('p');
+    humidThree = document.createElement('p');
+    humidFour = document.createElement('p');
+    humidFive = document.createElement('p');
+    cardOne.setAttribute("class","col card bluey");
+    cardTwo.setAttribute("class","col card bluey");
+    cardThree.setAttribute("class","col card bluey");
+    cardFour.setAttribute("class","col card bluey");
+    cardFive.setAttribute("class","col card bluey");
 
+    picOne.src = 'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png';
+    picTwo.src = 'http://openweathermap.org/img/w/' + data.list[1].weather[0].icon + '.png';
+    picThree.src = 'http://openweathermap.org/img/w/' + data.list[2].weather[0].icon + '.png';
+    picFour.src = 'http://openweathermap.org/img/w/' + data.list[3].weather[0].icon + '.png';
+    picFive.src = 'http://openweathermap.org/img/w/' + data.list[4].weather[0].icon + '.png';
+    tempOne.innerHTML = "Temp: " + data.list[0].main.temp + ' F°';
+    tempTwo.innerHTML = "Temp: " + data.list[1].main.temp + ' F°';
+    tempThree.innerHTML = "Temp: " + data.list[2].main.temp + ' F°';
+    tempFour.innerHTML = "Temp: " + data.list[3].main.temp + ' F°';
+    tempFive.innerHTML = "Temp: " + data.list[4].main.temp + ' F°';
+    humidOne.innerHTML = "Humidity: " + data.list[0].main.humidity + " %";
+    humidTwo.innerHTML = "Humidity: " + data.list[1].main.humidity + " %";
+    humidThree.innerHTML = "Humidity: " + data.list[2].main.humidity + " %";
+    humidFour.innerHTML = "Humidity: " + data.list[3].main.humidity + " %";
+    humidFive.innerHTML = "Humidity: " + data.list[4].main.humidity + " %";
+    fiveR.appendChild(cardOne);
+    cardOne.append(picOne);
+    cardOne.appendChild(tempOne);
+    tempOne.appendChild(humidOne);
+    fiveR.append(cardTwo);
+    cardTwo.append(picTwo);
+    cardTwo.appendChild(tempTwo);
+    tempTwo.appendChild(humidTwo);
+    fiveR.append(cardThree);
+    cardThree.append(picThree);
+    cardThree.appendChild(tempThree);
+    tempThree.appendChild(humidThree);
+    fiveR.append(cardFour);
+    cardFour.append(picFour);
+    cardFour.appendChild(tempFour);
+    tempFour.appendChild(humidFour);
+    fiveR.append(cardFive);
+    cardFive.append(picFive);
+    cardFive.appendChild(tempFive);
+    tempFive.appendChild(humidFive);
+    
+    }
 
 cityForm.addEventListener('submit',formSubmit);
