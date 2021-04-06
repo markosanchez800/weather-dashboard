@@ -7,6 +7,8 @@ var searchHistory = localStorage.getItem("pastCities");
 
 
 var formSubmit = function(event){
+    $("#weather-container").empty();
+    $("#fiveR").empty();
     event.preventDefault();
     var city = cityInput.value.trim();
     
@@ -150,6 +152,11 @@ var displayFiveDay = function(data,city){
     humidThree = document.createElement('p');
     humidFour = document.createElement('p');
     humidFive = document.createElement('p');
+    dateOne = moment().add(1, 'days').format("l"); 
+    dateTwo = moment().add(2, 'days').format("l"); 
+    dateThree = moment().add(3, 'days').format("l"); 
+    dateFour = moment().add(4, 'days').format("l"); 
+    dateFive = moment().add(5, 'days').format("l"); 
     cardOne.setAttribute("class","col card bluey");
     cardTwo.setAttribute("class","col card bluey");
     cardThree.setAttribute("class","col card bluey");
@@ -172,22 +179,27 @@ var displayFiveDay = function(data,city){
     humidFour.innerHTML = "Humidity: " + data.list[3].main.humidity + " %";
     humidFive.innerHTML = "Humidity: " + data.list[4].main.humidity + " %";
     fiveR.appendChild(cardOne);
+    cardOne.append(dateOne);
     cardOne.append(picOne);
     cardOne.appendChild(tempOne);
     tempOne.appendChild(humidOne);
     fiveR.append(cardTwo);
+    cardTwo.append(dateTwo);
     cardTwo.append(picTwo);
     cardTwo.appendChild(tempTwo);
     tempTwo.appendChild(humidTwo);
     fiveR.append(cardThree);
+    cardThree.append(dateThree);
     cardThree.append(picThree);
     cardThree.appendChild(tempThree);
     tempThree.appendChild(humidThree);
     fiveR.append(cardFour);
+    cardFour.append(dateFour);
     cardFour.append(picFour);
     cardFour.appendChild(tempFour);
     tempFour.appendChild(humidFour);
     fiveR.append(cardFive);
+    cardFive.append(dateFive);
     cardFive.append(picFive);
     cardFive.appendChild(tempFive);
     tempFive.appendChild(humidFive);
