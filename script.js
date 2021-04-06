@@ -28,6 +28,8 @@ var prevSearches = function(event){
             $("#weather-container").empty();
             $("#fiveR").empty();
             getCityWeather(cityBtn.textContent);
+            getFiveDay(cityBtn.textContent);
+
         });
         historyBox.append(cityBtn);
 
